@@ -5,6 +5,7 @@ import Main from "./pages/Main";
 import Menu from "./pages/Menu";
 import Nickname from "./pages/Nickname";
 import Introduce from "./pages/Introduce";
+import Location from "./pages/Location";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const Div = styled.div`
@@ -22,6 +23,7 @@ function App() {
           <Route path="/menu" element={<Menu />}></Route>
           <Route path="/nickname" element={<Nickname/>}></Route>
           <Route path="/introduce" element={<Introduce/>}></Route>
+          <Route path="/location" element={<Location/>}></Route>
         </Routes>
       </BrowserRouter>
     </Div>
