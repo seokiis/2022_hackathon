@@ -5,10 +5,7 @@ import Main from "./pages/Main";
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-const Div = styled.div`
-  width: 400px;
-  height: 700px;
-`;
+const Div = styled.div``;
 function App() {
   return (
     <Div className="App">
