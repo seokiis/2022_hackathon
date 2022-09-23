@@ -6,6 +6,11 @@ import logo from "../img/logo.png";
 const Div = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   background-image: linear-gradient(
     to right top,
     #9dff71,
@@ -26,17 +31,6 @@ const Div = styled.div`
 const StartImg = styled.img`
   width: 55%;
   border-radius: 50%;
-  margin-top: 40%;
-`;
-
-const BottomDiv = styled.div`
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  height: 10%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Welcome = styled.h2`
@@ -47,18 +41,28 @@ const Welcome2 = styled.h1`
   font-size: 4em;
   color: #4f4c2c;
   margin-top: 0;
-  //수정 필요
-  margin-bottom: 13%;
 `;
 const Logo = styled.img`
   padding: 10px 20px;
-  height: 70px;
+  height: 90px;
 `;
+
+const BottomDiv = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const NextButton = styled.button`
   border: none;
   background: none;
   font-weight: bold;
   font-size: 1.5rem;
+  margin-right: 10px;
 `;
 
 const NextDiv = styled.div`

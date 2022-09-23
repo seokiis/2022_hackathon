@@ -2,10 +2,13 @@ import "./App.css";
 import GlobalStyle from "./GlobalStyle";
 import styled from "styled-components";
 import Main from "./pages/Main";
-import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-const Div = styled.div``;
+const Div = styled.div`
+  height: 100vh;
+  width: 100%;
+`;
+
 function App() {
   return (
     <Div className="App">
