@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../img/logo2.png";
@@ -57,6 +57,13 @@ const WhereButton = styled.button`
   padding: 20px 10px;
   border-radius: 8px;
   box-shadow: 3px 3px 3px gray;
+
+  opacity: ${(props) => (props.value === props.item ? 0.6 : "none")};
+
+  cursor: pointer;
+  &:hover {
+    opacity: 0.6;
+  }
 `;
 
 const Logo = styled.img`
@@ -100,8 +107,22 @@ const TriangleButton = styled.div`
   border-width: 10px 0 10px 15px;
   border-color: transparent transparent transparent white;
 `;
+
+const dummyData = [
+  "북구",
+  "동구",
+  "서구",
+  "남구",
+  "중구",
+  "달서구",
+  "수성구",
+  "달성군",
+];
 function Location() {
   const navigate = useNavigate();
+
+  const [home, setHome] = useState("");
+
   return (
     <Div>
       <WhereQuestion>
@@ -109,14 +130,13 @@ function Location() {
         어디 사세요?
       </WhereQuestion>
       <WhereAnswerDiv>
-        <WhereButton>북구</WhereButton>
-        <WhereButton>동구</WhereButton>
-        <WhereButton>서구</WhereButton>
-        <WhereButton>남구</WhereButton>
-        <WhereButton>중구</WhereButton>
-        <WhereButton>달서구</WhereButton>
-        <WhereButton>수성구</WhereButton>
-        <WhereButton>달성군</WhereButton>
+        {dummyData.map((item) => {
+          return (
+            <WhereButton value={home} item={item} onClick={() => setHome(item)}>
+              {item}
+            </WhereButton>
+          );
+        })}
       </WhereAnswerDiv>
       <BottomDiv>
         <Logo src={logo} alt="로고"></Logo>

@@ -19,11 +19,11 @@ const ImgDiv = styled.div`
   opacity: ${(props) => (props.value === props.text ? 0.6 : "none")};
 
   &:hover {
-    opacity: 0.6;
+    opacity: ${(props) => (props.hover ? 0.6 : "none")};
   }
 `;
 
-const Img = ({ width, backgroundImg, value, text, onClick }) => {
+const Img = ({ width, backgroundImg, value, text, onClick, hover }) => {
   return (
     <ImgDiv
       width={width}
@@ -31,6 +31,7 @@ const Img = ({ width, backgroundImg, value, text, onClick }) => {
       value={value}
       text={text}
       onClick={onClick}
+      hover={hover}
     ></ImgDiv>
   );
 };

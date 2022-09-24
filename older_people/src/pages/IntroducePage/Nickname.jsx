@@ -5,8 +5,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const NicknameInput = styled.input`
-  width: 400px;
-  height: 79px;
+  width: 20rem;
+  height: 4rem;
   font-size: 3em;
   color: #000;
   font-family: "parkyongjun";
@@ -16,15 +16,14 @@ const NicknameInput = styled.input`
   border-radius: 10px;
   padding: 10px 20px;
 `;
-const ReportEditor = () => {
-  const [author, setAuthor] = useState("");
+const ReportEditor = ({ value, handleChange }) => {
   return (
     <div className="ReportEditor">
       <div>
         <NicknameInput
-          value={author}
+          value={value}
           onChange={(e) => {
-            setAuthor(e.target.value);
+            handleChange(e.target.value);
           }}
         />
       </div>
@@ -107,10 +106,12 @@ const TriangleButton = styled.div`
 
 function Nickname() {
   const navigate = useNavigate();
+  const [author, setAuthor] = useState("");
+
   return (
     <Div>
       <NicknameText>내 이름(별명)은?</NicknameText>
-      <ReportEditor></ReportEditor>
+      <ReportEditor value={author} handleChange={setAuthor} />
       <BottomDiv>
         <Logo src={logo} alt="로고"></Logo>
         <NextDiv>

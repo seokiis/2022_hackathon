@@ -100,7 +100,8 @@ const Result = () => {
         <Img
           width={"18rem"}
           backgroundImg={`url(${require(`../../img/${imgName}.jpeg`)})`}
-          value={false}
+          hover={false}
+          text={false}
         />
         <IntroSpan>
           {name}님,

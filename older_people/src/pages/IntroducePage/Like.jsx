@@ -105,6 +105,7 @@ const LikeItem = ({ backgroundImg, text, value, onClick }) => {
         value={value}
         text={text}
         backgroundImg={backgroundImg}
+        hover={true}
         onClick={() => onClick(text)}
       />
       <h2>{text}</h2>
