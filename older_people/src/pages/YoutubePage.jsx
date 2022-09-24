@@ -51,7 +51,10 @@ const VideoBox=styled.div`
 const Video=styled.div`
 `;
 
-
+const Iframe=styled.iframe`
+    width:400px;
+    height:250px;
+`
 
 const Logo = styled.img`
   padding: 10px 20px;
@@ -99,9 +102,9 @@ function YoutubePage() {
             <MainHead>유튜브 영상 모음집</MainHead>
             <VideoBox>
                 <Video>
-                <div style={{width:"400px",height:"200px",backgroundColor:"black"}}>
-
-                </div>
+                    <Iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/M7lc1UVf-VE"
+                    allowfullscreen>
+                    </Iframe>
                 </Video>
             </VideoBox>
             <BottomDiv>
