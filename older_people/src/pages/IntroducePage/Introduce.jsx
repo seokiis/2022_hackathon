@@ -1,41 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../img/logo2.png";
-import { useState } from "react";
-
-const NicknameInput = styled.input`
-  width: 400px;
-  height: 79px;
-  font-size: 3em;
-  color: #000;
-  font-family: "parkyongjun";
-  margin-top: 0%;
-  margin-bottom: 20%;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-`;
-const ReportEditor = () => {
-  const [author, setAuthor] = useState("");
-  return (
-    <div className="ReportEditor">
-      <div>
-        <NicknameInput
-          value={author}
-          onChange={(e) => {
-            setAuthor(e.target.value);
-          }}
-        />
-      </div>
-    </div>
-  );
-};
+import logo from "../../img/logo2.png";
 
 const Div = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
-  font-family: "parkyongjoon";
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -66,10 +37,13 @@ const BottomDiv = styled.div`
   position: absolute;
 `;
 
-const NicknameText = styled.h1`
-  font-size: 4em;
+const Introduce_ment = styled.h1`
+  font-family: "parkyongjoon";
+  font-size: 3em;
   color: white;
-  margin-bottom: 5%;
+  margin-top: 0%;
+  //수정 필요
+  margin-bottom: 20%;
 `;
 
 const Logo = styled.img`
@@ -85,10 +59,10 @@ const NextButton = styled.button`
   font-family: "parkyongjoon";
   color: white;
   margin-right: 10px;
+  cursor: pointer;
 `;
 
 const NextDiv = styled.div`
-  height: 100%;
   display: flex;
   align-items: center;
   position: absolute;
@@ -100,18 +74,24 @@ const TriangleButton = styled.div`
   height: 0;
   border-style: solid;
   border-width: 10px 0 10px 15px;
-  border-color: transparent transparent transparent white;
+  border-color: transparent transparent transparent #fff;
 `;
 
-function Nickname() {
+function Introduce() {
+  const navigate = useNavigate();
   return (
     <Div>
-      <NicknameText>내 이름(별명)은?</NicknameText>
-      <ReportEditor></ReportEditor>
+      <Introduce_ment>
+        간단한 질문들로
+        <br />
+        자신을 표현해 보세요
+      </Introduce_ment>
       <BottomDiv>
         <Logo src={logo} alt="로고"></Logo>
         <NextDiv>
-          <NextButton>다음</NextButton>
+          <NextButton onClick={() => navigate("/intro/location")}>
+            다음
+          </NextButton>
           <TriangleButton></TriangleButton>
         </NextDiv>
       </BottomDiv>
@@ -119,4 +99,4 @@ function Nickname() {
   );
 }
 
-export default Nickname;
+export default Introduce;

@@ -3,9 +3,7 @@ import GlobalStyle from "./GlobalStyle";
 import styled from "styled-components";
 import Main from "./pages/Main";
 import Menu from "./pages/Menu";
-import Nickname from "./pages/Nickname";
-import Introduce from "./pages/Introduce";
-import Location from "./pages/Location";
+import IntroducePage from "./pages/IntroducePage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import YoutubePage from "./pages/YoutubePage";
 
@@ -20,11 +18,12 @@ function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
+          {/* 랜딩 페이지 */}
           <Route path="/" element={<Main />}></Route>
+          {/* 메인 메뉴 페이지 */}
           <Route path="/menu" element={<Menu />}></Route>
-          <Route path="/nickname" element={<Nickname />}></Route>
-          <Route path="/introduce" element={<Introduce />}></Route>
-          <Route path="/location" element={<Location />}></Route>
+          {/* 자기 소개 페이지 */}
+          <Route path="/intro/*" element={<IntroducePage />}></Route>
           <Route path="/youtube" element={<YoutubePage />}></Route>
         </Routes>
       </BrowserRouter>

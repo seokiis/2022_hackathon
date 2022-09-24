@@ -92,7 +92,6 @@ function Main() {
       <Welcome2>환영합니다</Welcome2>
       <BottomDiv>
         <Logo src={logo} alt="로고"></Logo>
-
         <NextDiv>
           <Link to="/menu">
             <NextButton>다음</NextButton>

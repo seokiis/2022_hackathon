@@ -1,4 +1,6 @@
 import React from "react";
+import { Navigate, useNavigate, Link } from "react-router-dom";
+
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
@@ -60,6 +62,11 @@ const AddProfile = styled.div`
   justify-content: center;
   border-radius: 50%;
   background-color: lightgray;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #91ce9f;
+  }
 `;
 const SpeechBubble = styled.div`
   position: relative;
@@ -91,10 +98,11 @@ const BubbleText = styled.span`
   font-size: 2rem;
 `;
 function Menu() {
+  const navigate = useNavigate();
   return (
     <Div>
       <UserDiv>
-        <AddProfile>
+        <AddProfile onClick={() => navigate("/intro")}>
           <FontAwesomeIcon
             style={{ fontSize: "4rem", color: "white" }}
             icon={faUserPlus}
@@ -109,12 +117,14 @@ function Menu() {
         </SpeechBubble>
       </UserDiv>
       <MenuNav>
-        <MenuDiv style={{ backgroundColor: "#fffade" }}>
-          <IconDiv>
-            <FontAwesomeIcon style={{ color: "#F8E264" }} icon={faYoutube} />
-          </IconDiv>
-          유튜브
-        </MenuDiv>
+        <Link to="/youtube" style={{ textDecoration: "none", width: "100%" }}>
+          <MenuDiv style={{ backgroundColor: "#fffade" }}>
+            <IconDiv>
+              <FontAwesomeIcon style={{ color: "#F8E264" }} icon={faYoutube} />
+            </IconDiv>
+            유튜브
+          </MenuDiv>
+        </Link>
         <MenuDiv style={{ backgroundColor: "#e2fce9" }}>
           <IconDiv>
             <FontAwesomeIcon
