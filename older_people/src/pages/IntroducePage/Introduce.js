@@ -1,15 +1,15 @@
-import React  from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../img/logo2.png";
-
+import logo from "../../img/logo2.png";
 
 const Div = styled.div`
   width: 100%;
   height: 100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-image: linear-gradient(
     to left bottom,
     #98cfa1,
@@ -27,8 +27,6 @@ const Div = styled.div`
   );
 `;
 
-
-
 const BottomDiv = styled.div`
   bottom: 0;
   width: 100%;
@@ -36,11 +34,11 @@ const BottomDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position:absolute;
+  position: absolute;
 `;
 
 const Introduce_ment = styled.h1`
-  font-family:"parkyongjoon";
+  font-family: "parkyongjoon";
   font-size: 3em;
   color: white;
   margin-top: 0%;
@@ -49,8 +47,8 @@ const Introduce_ment = styled.h1`
 `;
 
 const Logo = styled.img`
-    padding: 10px 20px;
-    height: 90px;
+  padding: 10px 20px;
+  height: 90px;
 `;
 
 const NextButton = styled.button`
@@ -58,13 +56,13 @@ const NextButton = styled.button`
   background: none;
   font-weight: bold;
   font-size: 1.5rem;
-  font-family:"parkyongjoon";
-  color:white;
-  margin-right:10px;
+  font-family: "parkyongjoon";
+  color: white;
+  margin-right: 10px;
+  cursor: pointer;
 `;
 
 const NextDiv = styled.div`
-  height: 100%;
   display: flex;
   align-items: center;
   position: absolute;
@@ -72,21 +70,28 @@ const NextDiv = styled.div`
 `;
 
 const TriangleButton = styled.div`
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 10px 0 10px 15px;
-    border-color: transparent transparent transparent #fff;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 15px;
+  border-color: transparent transparent transparent #fff;
 `;
 
 function Introduce() {
+  const navigate = useNavigate();
   return (
     <Div>
-        <Introduce_ment>간단한 질문들로<br/>자신을 표현해 보세요</Introduce_ment>
-        <BottomDiv>
+      <Introduce_ment>
+        간단한 질문들로
+        <br />
+        자신을 표현해 보세요
+      </Introduce_ment>
+      <BottomDiv>
         <Logo src={logo} alt="로고"></Logo>
         <NextDiv>
-          <NextButton>다음</NextButton>
+          <NextButton onClick={() => navigate("/intro/location")}>
+            다음
+          </NextButton>
           <TriangleButton></TriangleButton>
         </NextDiv>
       </BottomDiv>

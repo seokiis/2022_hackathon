@@ -1,36 +1,35 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../img/logo2.png";
+import logo from "../../img/logo2.png";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const NicknameInput=styled.input`
+const NicknameInput = styled.input`
   width: 400px;
   height: 79px;
   font-size: 3em;
-  color:#000;
-  font-family: 'parkyongjun';
+  color: #000;
+  font-family: "parkyongjun";
   margin-top: 0%;
   margin-bottom: 20%;
-  border:none;
-  border-radius:10px;
-  padding:10px 20px;
-
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
 `;
 const ReportEditor = () => {
   const [author, setAuthor] = useState("");
-  return(
+  return (
     <div className="ReportEditor">
       <div>
-      <NicknameInput
-        value = {author}
-        onChange={(e) => {
-          setAuthor(e.target.value);
-        }}
-      />
+        <NicknameInput
+          value={author}
+          onChange={(e) => {
+            setAuthor(e.target.value);
+          }}
+        />
       </div>
     </div>
   );
-  
 };
 
 const Div = styled.div`
@@ -38,9 +37,9 @@ const Div = styled.div`
   height: 100vh;
   display: flex;
   font-family: "parkyongjoon";
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-image: linear-gradient(
     to left bottom,
     #98cfa1,
@@ -81,20 +80,21 @@ const Logo = styled.img`
 
 const NextButton = styled.button`
   border: none;
-  background:none;
+  background: none;
   font-weight: bold;
   font-size: 1.5rem;
   font-family: "parkyongjoon";
-  color:white;
-  margin-right:10px;
+  color: white;
+  margin-right: 10px;
+  cursor: pointer;
 `;
 
 const NextDiv = styled.div`
-  hegiht: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
-  position:absolute;
-  right:20px;
+  position: absolute;
+  right: 20px;
 `;
 
 const TriangleButton = styled.div`
@@ -106,19 +106,20 @@ const TriangleButton = styled.div`
 `;
 
 function Nickname() {
- return (
+  const navigate = useNavigate();
+  return (
     <Div>
-        <NicknameText>내 이름(별명)은?</NicknameText>
-        <ReportEditor></ReportEditor>
-        <BottomDiv>
-          <Logo src={logo} alt="로고"></Logo>
-          <NextDiv>
-            <NextButton>다음</NextButton>
-            <TriangleButton></TriangleButton>
-          </NextDiv>
-        </BottomDiv>
+      <NicknameText>내 이름(별명)은?</NicknameText>
+      <ReportEditor></ReportEditor>
+      <BottomDiv>
+        <Logo src={logo} alt="로고"></Logo>
+        <NextDiv>
+          <NextButton onClick={() => navigate("/intro/like")}>다음</NextButton>
+          <TriangleButton></TriangleButton>
+        </NextDiv>
+      </BottomDiv>
     </Div>
- );
+  );
 }
 
 export default Nickname;
