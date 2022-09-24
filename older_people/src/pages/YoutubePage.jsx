@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import logo from "../img/logo2.png";
 
@@ -7,7 +7,7 @@ const Div = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   background-image: linear-gradient(
     to left bottom,
@@ -27,34 +27,32 @@ const Div = styled.div`
 `;
 
 const MainHead = styled.h1`
-  font-family:'parkyongjoon';
+  font-family: "parkyongjoon";
   font-size: 4em;
   color: white;
-  position:absolute;
-  top:15px;
+  position: absolute;
+  top: 15px;
 `;
 
-const VideoBox=styled.div`
-    position:absolute;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:90%;
-    height: 70%;
-    bottom:90px;
-    display:flex;
-    border:none;
-    background-color: white;
-    border-radius:8px;
+const Iframe = styled.iframe`
+  margin: 10px 0;
 `;
 
-const Video=styled.div`
+const VideoBox = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: scroll;
+  width: 90%;
+  height: 70%;
+  bottom: 90px;
+  display: flex;
+  border: none;
+  background-color: white;
+  border-radius: 8px;
 `;
-
-const Iframe=styled.iframe`
-    width:400px;
-    height:250px;
-`
 
 const Logo = styled.img`
   padding: 10px 20px;
@@ -78,7 +76,7 @@ const NextButton = styled.button`
   font-size: 1.5rem;
   margin-right: 10px;
   color: white;
-  font-family:'parkyongjoon';
+  font-family: "parkyongjoon";
 `;
 
 const NextDiv = styled.div`
@@ -97,26 +95,50 @@ const TriangleButton = styled.div`
   border-color: transparent transparent transparent white;
 `;
 function YoutubePage() {
-    return (
-        <Div>
-            <MainHead>유튜브 영상 모음집</MainHead>
-            <VideoBox>
-                <Video>
-                    <Iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/M7lc1UVf-VE"
-                    allowfullscreen>
-                    </Iframe>
-                </Video>
-            </VideoBox>
-            <BottomDiv>
-                <Logo src={logo} alt="로고"></Logo>
-                <NextDiv>
-                    <NextButton>다음</NextButton>
-                    <TriangleButton></TriangleButton>
-                </NextDiv>
-            </BottomDiv>
-        </Div>
-    );
+  const [data, setData] = useState([]);
+  const [sub, setSub] = useState("임영웅");
+  useEffect(() => {
+    async function fetchData() {
+      await fetch(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${sub}&type=video&key=AIzaSyBTw-Ae92P_LKINQJs9rqpzjFN91pJMoCM`
+      )
+        .then((res) => res.json())
+        .then((result) => setData(result.items));
+    }
+    fetchData();
+  }, []);
+
+  return (
+    <Div>
+      <MainHead>유튜브 영상 모음집</MainHead>
+      <VideoBox>
+        <div style={{ height: "100%" }}>
+          {data.map((data, index) => {
+            let url =
+              "https://www.youtube.com/embed/" + String(data.id.videoId);
+            return (
+              <Iframe
+                key={index}
+                title="youtube"
+                type="text/html"
+                width="80%"
+                height="40%"
+                src={url}
+              ></Iframe>
+            );
+          })}
+        </div>
+      </VideoBox>
+
+      <BottomDiv>
+        <Logo src={logo} alt="로고"></Logo>
+        <NextDiv>
+          <NextButton>다음</NextButton>
+          <TriangleButton></TriangleButton>
+        </NextDiv>
+      </BottomDiv>
+    </Div>
+  );
 }
 
 export default YoutubePage;
-
