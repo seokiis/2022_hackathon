@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import logo from "../img/logo2.png";
 
@@ -44,9 +44,6 @@ const KeySelector = styled.div`
   grid-gap: 0.8rem;
 
   margin-bottom: 1rem;
-
-  //   position:absolute;
-  //   top:115px;
 `;
 
 const Key = styled.button`
@@ -65,30 +62,22 @@ const Key = styled.button`
   box-shadow: 3px 3px 3px gray;
 `;
 
+const Iframe = styled.iframe`
+  margin: 10px 0;
+`;
+
 const VideoBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  overflow: scroll;
   width: 90%;
   height: 55%;
+  display: flex;
   border: none;
   background-color: white;
   border-radius: 8px;
-  // position:absolute;
-  // bottom:78px;
-`;
-
-const Video = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Iframe = styled.iframe`
-  width: 90%;
-  height: 90%;
 `;
 
 const Logo = styled.img`
@@ -144,7 +133,18 @@ const dummyData = [
 ];
 
 function YoutubePage() {
-  const [tag, setTag] = useState("");
+  const [data, setData] = useState([]);
+  const [sub, setSub] = useState("임영웅");
+  useEffect(() => {
+    async function fetchData() {
+      await fetch(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${sub}&type=video&key=AIzaSyBTw-Ae92P_LKINQJs9rqpzjFN91pJMoCM`
+      )
+        .then((res) => res.json())
+        .then((result) => setData(result.items));
+    }
+    fetchData();
+  }, []);
   return (
     <Div>
       <MainHead>유튜브 영상 모음집</MainHead>
@@ -154,15 +154,24 @@ function YoutubePage() {
         })}
       </KeySelector>
       <VideoBox>
-        <Video>
-          <Iframe
-            id="ytplayer"
-            type="text/html"
-            src="https://www.youtube.com/embed/M7lc1UVf-VE"
-            allowfullscreen
-          ></Iframe>
-        </Video>
+        <div style={{ height: "100%" }}>
+          {data.map((data, index) => {
+            let url =
+              "https://www.youtube.com/embed/" + String(data.id.videoId);
+            return (
+              <Iframe
+                key={index}
+                title="youtube"
+                type="text/html"
+                width="80%"
+                height="40%"
+                src={url}
+              ></Iframe>
+            );
+          })}
+        </div>
       </VideoBox>
+
       <BottomDiv>
         <Logo src={logo} alt="로고"></Logo>
         <NextDiv>
