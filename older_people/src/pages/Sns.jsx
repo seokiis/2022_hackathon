@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import "../snsWave.css";
+import { Link } from "react-router-dom";
+//img
 import profileimg from "../img/user.png";
 import flower from "../img/꽃.jpeg";
 import puppy from "../img/강아지.jpeg";
@@ -153,6 +155,35 @@ const Board = styled.div`
   display: flex;
   flex-direction: column;
 `;
+const NextButton = styled.button`
+  border: none;
+  background: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-right: 10px;
+  color: white;
+  font-family: "parkyongjoon";
+  cursor: pointer;
+`;
+
+const NextDiv = styled.div`
+  width: 20%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 3%;
+`;
+
+const TriangleButton = styled.div`
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 15px 10px 0;
+  border-color: transparent white transparent white;
+  margin-right: 10px;
+`;
 function Sns() {
   const [post, setPost] = useState("");
   function PostChange(e) {
@@ -175,6 +206,12 @@ function Sns() {
           ></Posting>
           <RegisterButton disabled>등록</RegisterButton>
         </PostingDiv>
+        <NextDiv>
+          <TriangleButton></TriangleButton>
+          <Link to="/menu">
+            <NextButton>이전</NextButton>
+          </Link>
+        </NextDiv>
       </HeaderBackground>
       <Board>
         {postData.map((item, index) => {
