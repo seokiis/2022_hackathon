@@ -5,6 +5,9 @@ import logo from "../../img/logo2.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+//components
+import Img from "../../components/Img";
+
 const Div = styled.div`
   width: 100%;
   height: 100vh;
@@ -85,28 +88,7 @@ const Wrapper = styled.div`
   gap: 0.5rem;
 `;
 
-const Img = styled.div`
-  width: 10rem;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-
-  background-image: ${(props) => props.backgroundImg};
-  background-size: cover;
-  background-position: center;
-  background-color: white;
-
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-
-  cursor: pointer;
-
-  opacity: ${(props) => (props.value === props.text ? 0.6 : "none")};
-
-  &:hover {
-    opacity: 0.6;
-  }
-`;
-
-const LickItems = styled.div`
+const LikeItems = styled.div`
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(3, 1fr);
@@ -119,6 +101,7 @@ const LikeItem = ({ backgroundImg, text, value, onClick }) => {
   return (
     <Wrapper>
       <Img
+        width={"10rem"}
         value={value}
         text={text}
         backgroundImg={backgroundImg}
@@ -142,7 +125,7 @@ const Like = () => {
   return (
     <Div>
       <LikeText>내가 좋아하는 것은?</LikeText>
-      <LickItems>
+      <LikeItems>
         {dummyData.map((it) => {
           return (
             <LikeItem
@@ -153,11 +136,13 @@ const Like = () => {
             />
           );
         })}
-      </LickItems>
+      </LikeItems>
       <BottomDiv>
         <Logo src={logo} alt="로고"></Logo>
         <NextDiv>
-          <NextButton onClick={() => navigate("/intro/like")}>다음</NextButton>
+          <NextButton onClick={() => navigate("/intro/result")}>
+            다음
+          </NextButton>
           <TriangleButton />
         </NextDiv>
       </BottomDiv>

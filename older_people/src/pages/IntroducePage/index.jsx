@@ -1,11 +1,11 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import styled from "styled-components";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Nickname from "./Nickname";
 import Introduce from "./Introduce";
 import Location from "./Location";
 import Like from "./Like";
+import Result from "./Result";
 
 const IntroducePage = () => {
   return (
@@ -15,6 +15,7 @@ const IntroducePage = () => {
       <Route path="/location" element={<Location />}></Route>
       <Route path="/nickname" element={<Nickname />}></Route>
       <Route path="/like" element={<Like />}></Route>
+      <Route path="/result" element={<Result />}></Route>
     </Routes>
   );
 };
