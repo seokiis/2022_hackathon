@@ -125,15 +125,17 @@ function Menu() {
             유튜브
           </MenuDiv>
         </Link>
-        <MenuDiv style={{ backgroundColor: "#e2fce9" }}>
-          <IconDiv>
-            <FontAwesomeIcon
-              style={{ color: "#9BF1B2" }}
-              icon={faHandshakeAngle}
-            />
-          </IconDiv>
-          소통방
-        </MenuDiv>
+        <Link to="/sns" style={{ textDecoration: "none", width: "100%" }}>
+          <MenuDiv style={{ backgroundColor: "#e2fce9" }}>
+            <IconDiv>
+              <FontAwesomeIcon
+                style={{ color: "#9BF1B2" }}
+                icon={faHandshakeAngle}
+              />
+            </IconDiv>
+            소통방
+          </MenuDiv>
+        </Link>
         <MenuDivRow>
           <MenuDiv
             style={{
