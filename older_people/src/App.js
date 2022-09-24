@@ -5,6 +5,7 @@ import Main from "./pages/Main";
 import Menu from "./pages/Menu";
 import IntroducePage from "./pages/IntroducePage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import YoutubePage from "./pages/YoutubePage";
 
 const Div = styled.div`
   height: 100vh;
@@ -23,6 +24,7 @@ function App() {
           <Route path="/menu" element={<Menu />}></Route>
           {/* 자기 소개 페이지 */}
           <Route path="/intro/*" element={<IntroducePage />}></Route>
+          <Route path="/youtube" element={<YoutubePage />}></Route>
         </Routes>
       </BrowserRouter>
     </Div>

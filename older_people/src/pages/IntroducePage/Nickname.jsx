@@ -16,6 +16,7 @@ const NicknameInput = styled.input`
   border-radius: 10px;
   padding: 10px 20px;
 `;
+
 const ReportEditor = ({ value, handleChange }) => {
   return (
     <div className="ReportEditor">

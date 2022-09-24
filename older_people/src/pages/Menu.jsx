@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -117,12 +117,14 @@ function Menu() {
         </SpeechBubble>
       </UserDiv>
       <MenuNav>
-        <MenuDiv style={{ backgroundColor: "#fffade" }}>
-          <IconDiv>
-            <FontAwesomeIcon style={{ color: "#F8E264" }} icon={faYoutube} />
-          </IconDiv>
-          유튜브
-        </MenuDiv>
+        <Link to="/youtube" style={{ textDecoration: "none", width: "100%" }}>
+          <MenuDiv style={{ backgroundColor: "#fffade" }}>
+            <IconDiv>
+              <FontAwesomeIcon style={{ color: "#F8E264" }} icon={faYoutube} />
+            </IconDiv>
+            유튜브
+          </MenuDiv>
+        </Link>
         <MenuDiv style={{ backgroundColor: "#e2fce9" }}>
           <IconDiv>
             <FontAwesomeIcon
