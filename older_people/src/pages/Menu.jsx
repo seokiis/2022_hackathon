@@ -97,6 +97,13 @@ const BubbleText = styled.span`
   font-family: "parkyongjoon";
   font-size: 2rem;
 `;
+const Kakao = styled.div`
+  font-size: 1.8rem;
+`;
+const Youtube = styled.div`
+  font-size: 1.8rem;
+`;
+
 function Menu() {
   const navigate = useNavigate();
   return (
@@ -144,17 +151,21 @@ function Menu() {
             <IconDiv>
               <FontAwesomeIcon style={{ color: "#93EEEE" }} icon={faMessage} />
             </IconDiv>
-            카카오톡
-            <br />
-            사용법
+            <Kakao>
+              카카오톡
+              <br />
+              사용법
+            </Kakao>
           </MenuDiv>
           <MenuDiv style={{ backgroundColor: "#fff6ff" }}>
             <IconDiv>
               <FontAwesomeIcon style={{ color: "#FBBCFB" }} icon={faYoutube} />
             </IconDiv>
-            유튜브
-            <br />
-            사용법
+            <Youtube>
+              유튜브
+              <br />
+              사용법
+            </Youtube>
           </MenuDiv>
         </MenuDivRow>
       </MenuNav>

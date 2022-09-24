@@ -100,8 +100,8 @@ const NextButton = styled.button`
   font-weight: bold;
   font-size: 1.5rem;
 
-  margin-right: 10px;
-  color: white;
+  margin-left: 10px;
+  color: #ff6b54;
   font-family: "parkyongjoon";
 `;
 
@@ -109,15 +109,7 @@ const NextDiv = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  right: 20px;
-`;
-
-const TriangleButton = styled.div`
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 10px 0 10px 15px;
-  border-color: transparent transparent transparent white;
+  left: 20px;
 `;
 
 const dummyData = [
@@ -185,8 +177,7 @@ function YoutubePage() {
       <BottomDiv>
         <Logo src={logo} alt="로고"></Logo>
         <NextDiv>
-          <NextButton>다음</NextButton>
-          <TriangleButton></TriangleButton>
+          <NextButton>다봤어요!</NextButton>
         </NextDiv>
       </BottomDiv>
     </Div>
