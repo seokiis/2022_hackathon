@@ -1,4 +1,6 @@
 import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
@@ -60,6 +62,11 @@ const AddProfile = styled.div`
   justify-content: center;
   border-radius: 50%;
   background-color: lightgray;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #91ce9f;
+  }
 `;
 const SpeechBubble = styled.div`
   position: relative;
@@ -91,10 +98,11 @@ const BubbleText = styled.span`
   font-size: 2rem;
 `;
 function Menu() {
+  const navigate = useNavigate();
   return (
     <Div>
       <UserDiv>
-        <AddProfile>
+        <AddProfile onClick={() => navigate("/intro")}>
           <FontAwesomeIcon
             style={{ fontSize: "4rem", color: "white" }}
             icon={faUserPlus}
