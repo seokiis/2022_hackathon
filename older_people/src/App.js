@@ -22,11 +22,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/menu" element={<Menu />}></Route>
-          <Route path="/nickname" element={<Nickname/>}></Route>
-          <Route path="/introduce" element={<Introduce/>}></Route>
-          <Route path="/location" element={<Location/>}></Route>
-          <Route path="/youtube" element={<YoutubePage/>}></Route>
-
+          <Route path="/nickname" element={<Nickname />}></Route>
+          <Route path="/introduce" element={<Introduce />}></Route>
+          <Route path="/location" element={<Location />}></Route>
+          <Route path="/youtube" element={<YoutubePage />}></Route>
         </Routes>
       </BrowserRouter>
     </Div>

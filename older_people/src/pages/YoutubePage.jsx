@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../img/logo2.png";
 
@@ -7,7 +7,7 @@ const Div = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   background-image: linear-gradient(
     to left bottom,
@@ -27,34 +27,69 @@ const Div = styled.div`
 `;
 
 const MainHead = styled.h1`
-  font-family:'parkyongjoon';
+  font-family: "parkyongjoon";
   font-size: 4em;
   color: white;
-  position:absolute;
-  top:15px;
 `;
 
-const VideoBox=styled.div`
-    position:absolute;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:90%;
-    height: 70%;
-    bottom:90px;
-    display:flex;
-    border:none;
-    background-color: white;
-    border-radius:8px;
+const KeySelector = styled.div`
+  width: 90%;
+
+  align-items: center;
+  justify-content: center;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 0.8rem;
+
+  margin-bottom: 1rem;
+
+  //   position:absolute;
+  //   top:115px;
 `;
 
-const Video=styled.div`
+const Key = styled.button`
+  font-family: "parkyongjoon";
+  border: none;
+  background-color: white;
+
+  font-weight: bold;
+  font-size: 1.1rem;
+
+  width: 100%;
+  height: 100%;
+  padding: 5px 8px;
+
+  border-radius: 8px;
+  box-shadow: 3px 3px 3px gray;
 `;
 
-const Iframe=styled.iframe`
-    width:400px;
-    height:250px;
-`
+const VideoBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 55%;
+  border: none;
+  background-color: white;
+  border-radius: 8px;
+  // position:absolute;
+  // bottom:78px;
+`;
+
+const Video = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Iframe = styled.iframe`
+  width: 90%;
+  height: 90%;
+`;
 
 const Logo = styled.img`
   padding: 10px 20px;
@@ -62,8 +97,6 @@ const Logo = styled.img`
 `;
 
 const BottomDiv = styled.div`
-  position: absolute;
-  bottom: 0;
   width: 100%;
   height: 10%;
   display: flex;
@@ -74,15 +107,16 @@ const BottomDiv = styled.div`
 const NextButton = styled.button`
   border: none;
   background: none;
+
   font-weight: bold;
   font-size: 1.5rem;
+
   margin-right: 10px;
   color: white;
-  font-family:'parkyongjoon';
+  font-family: "parkyongjoon";
 `;
 
 const NextDiv = styled.div`
-  height: 100%;
   display: flex;
   align-items: center;
   position: absolute;
@@ -96,27 +130,48 @@ const TriangleButton = styled.div`
   border-width: 10px 0 10px 15px;
   border-color: transparent transparent transparent white;
 `;
+
+const dummyData = [
+  "건강",
+  "정치",
+  "트로트",
+  "임영웅",
+  "전국노래자랑",
+  "노후",
+  "박막례",
+  "여행",
+  "반려동물",
+];
+
 function YoutubePage() {
-    return (
-        <Div>
-            <MainHead>유튜브 영상 모음집</MainHead>
-            <VideoBox>
-                <Video>
-                    <Iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/M7lc1UVf-VE"
-                    allowfullscreen>
-                    </Iframe>
-                </Video>
-            </VideoBox>
-            <BottomDiv>
-                <Logo src={logo} alt="로고"></Logo>
-                <NextDiv>
-                    <NextButton>다음</NextButton>
-                    <TriangleButton></TriangleButton>
-                </NextDiv>
-            </BottomDiv>
-        </Div>
-    );
+  const [tag, setTag] = useState("");
+  return (
+    <Div>
+      <MainHead>유튜브 영상 모음집</MainHead>
+      <KeySelector>
+        {dummyData.map((it) => {
+          return <Key>{it}</Key>;
+        })}
+      </KeySelector>
+      <VideoBox>
+        <Video>
+          <Iframe
+            id="ytplayer"
+            type="text/html"
+            src="https://www.youtube.com/embed/M7lc1UVf-VE"
+            allowfullscreen
+          ></Iframe>
+        </Video>
+      </VideoBox>
+      <BottomDiv>
+        <Logo src={logo} alt="로고"></Logo>
+        <NextDiv>
+          <NextButton>다음</NextButton>
+          <TriangleButton></TriangleButton>
+        </NextDiv>
+      </BottomDiv>
+    </Div>
+  );
 }
 
 export default YoutubePage;
-
