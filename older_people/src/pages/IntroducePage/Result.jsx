@@ -85,6 +85,33 @@ const TriangleButton = styled.div`
   border-color: transparent transparent transparent #ff6b54;
 `;
 
+const PreButton = styled.button`
+  border: none;
+  background: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+  font-family: "parkyongjoon";
+  color: white;
+  margin-left: 10px;
+  cursor: pointer;
+`;
+
+const PreDiv = styled.div`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 20px;
+`;
+
+const TriangleButtonBack = styled.div`
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 15px;
+  transform: rotate(180deg);
+  border-color: transparent transparent transparent #fff;
+`;
+
 const Result = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("김숙자");
@@ -115,6 +142,10 @@ const Result = () => {
           <NextButton onClick={() => navigate("/menu")}>다했어요!</NextButton>
           <TriangleButton />
         </NextDiv>
+        <PreDiv>
+          <TriangleButtonBack></TriangleButtonBack>
+          <PreButton onClick={() => navigate("/intro/like")}>이전</PreButton>
+        </PreDiv>
       </BottomDiv>
     </Div>
   );

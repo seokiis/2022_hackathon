@@ -105,6 +105,33 @@ const TriangleButton = styled.div`
   border-color: transparent transparent transparent white;
 `;
 
+const PreButton = styled.button`
+  border: none;
+  background: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+  font-family: "parkyongjoon";
+  color: white;
+  margin-left: 10px;
+  cursor: pointer;
+`;
+
+const PreDiv = styled.div`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 20px;
+`;
+
+const TriangleButtonBack = styled.div`
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 15px;
+  transform: rotate(180deg);
+  border-color: transparent transparent transparent #fff;
+`;
+
 function Nickname() {
   const navigate = useNavigate();
   const [author, setAuthor] = useState("");
@@ -119,6 +146,12 @@ function Nickname() {
           <NextButton onClick={() => navigate("/intro/like")}>다음</NextButton>
           <TriangleButton></TriangleButton>
         </NextDiv>
+        <PreDiv>
+          <TriangleButtonBack></TriangleButtonBack>
+          <PreButton onClick={() => navigate("/intro/location")}>
+            이전
+          </PreButton>
+        </PreDiv>
       </BottomDiv>
     </Div>
   );
