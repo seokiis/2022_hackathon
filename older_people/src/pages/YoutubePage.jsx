@@ -135,27 +135,36 @@ const dummyData = [
 function YoutubePage() {
   const [data, setData] = useState([]);
   const [sub, setSub] = useState("임영웅");
+  const apikey = process.env.REACT_APP_GCP_API_KEY;
   useEffect(() => {
     async function fetchData() {
       await fetch(
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${sub}&type=video&key=AIzaSyBTw-Ae92P_LKINQJs9rqpzjFN91pJMoCM`
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${sub}&type=video&key=${apikey}`
       )
         .then((res) => res.json())
-        .then((result) => setData(result.items));
+        .then((result) => {
+          setData(result.items);
+          console.log(result);
+        });
     }
     fetchData();
-  }, []);
+  }, [sub]);
+  console.log(sub);
   return (
     <Div>
       <MainHead>유튜브 영상 모음집</MainHead>
       <KeySelector>
-        {dummyData.map((it) => {
-          return <Key>{it}</Key>;
+        {dummyData.map((it, index) => {
+          return (
+            <Key key={index} onClick={() => setSub(it)}>
+              {it}
+            </Key>
+          );
         })}
       </KeySelector>
       <VideoBox>
         <div style={{ height: "100%" }}>
-          {data.map((data, index) => {
+          {data?.map((data, index) => {
             let url =
               "https://www.youtube.com/embed/" + String(data.id.videoId);
             return (
@@ -166,6 +175,7 @@ function YoutubePage() {
                 width="80%"
                 height="40%"
                 src={url}
+                allow="fullscreen"
               ></Iframe>
             );
           })}
