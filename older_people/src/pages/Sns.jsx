@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 // auth
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, child, get } from "firebase/database";
+import { database } from "../firebase";
 //img
 import defaultProfileImg from "../img/user.png";
 import flower from "../img/꽃.jpeg";
@@ -47,19 +48,13 @@ const HeaderBackground = styled.div`
 
 const Profile = styled.img`
   position: absolute;
+  border-radius: 50%;
   top: 10%;
   left: 10%;
   width: 140px;
   height: 140px;
 `;
 
-const Emoji = styled.img`
-  width: 80px;
-  height: 80px;
-  position: absolute;
-  top: 2%;
-  left: 22%;
-`;
 const PostingDiv = styled.div`
   position: absolute;
   display: flex;
@@ -82,21 +77,6 @@ const Posting = styled.textarea`
     outline: none;
   }
 `;
-
-// const FeelingDiv = styled.div`
-//   width: 80%;
-//   position: absolute;
-//   display: flex;
-//   justify-content: space-between;
-
-//   margin-left: 1%;
-//   margin-right: 1%;
-// `;
-
-// const Feeling = styled.img`
-//   width: 16%;
-//   border-radius: 50%;
-// `;
 
 const RegisterButton = styled.button`
   width: 20%;
@@ -144,13 +124,6 @@ const PostingText = styled.p`
   margin-bottom: 30px;
 `;
 
-const PostingEmoji = styled.img`
-  width: 35px;
-  position: absolute;
-  top: 2%;
-  left: 13%;
-`;
-
 const LikeDiv = styled.div`
   display: flex;
   align-items: center;
@@ -181,6 +154,7 @@ const Board = styled.div`
   overflow: scroll;
   display: flex;
   flex-direction: column;
+  margin-top: -20px;
 `;
 const NextButton = styled.button`
   border: none;
@@ -224,37 +198,67 @@ const PostingFooter = styled.div`
 
 function Sns() {
   const [post, setPost] = useState("");
-  const [userData, setUserData] = useState("");
+  const [userId, setUserId] = useState("");
+  const [userData, setUserData] = useState({});
+  const [userProfile, setUserProfile] = useState("");
+  const [userNickname, setUserNickname] = useState("");
 
-  // 계정 check
   useEffect(() => {
-    // auth id
-    const auth = getAuth();
-    const uid = "";
-    onAuthStateChanged(auth, (user) => {
+    getAuth().onAuthStateChanged((user) => {
       if (user) {
-        // uid 획득
-        uid = user.uid;
+        const uid = user.uid;
+        setUserId(uid);
       } else {
-        console.log("error: no userId");
+        console.log("err");
       }
     });
-
-    // 해당 id db search
-    const dbRef = ref(getDatabase());
-    get(child(dbRef, `users/${uid}`))
+  }, []);
+  useEffect(() => {
+    const Ref = ref(database);
+    get(child(Ref, "users/" + userId))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          // 데이터 존재한다면
-          setUserData(snapshot.val());
+          setUserData(Object(snapshot.val()));
         } else {
           console.log("No data available");
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }, []);
+  const User = userData[userId];
+  console.log(User);
+  useEffect(() => {
+    if (User) {
+      setUserNickname(User["nickname"]);
+    }
+  }, [userData]);
+
+  useEffect(() => {
+    if (User) {
+      switch (User["profilePicture"]) {
+        case "강아지":
+          setUserProfile(puppy);
+          return;
+        case "고양이":
+          setUserProfile(cat);
+          return;
+        case "꽃":
+          setUserProfile(flower);
+          return;
+        case "바다":
+          setUserProfile(sea);
+          return;
+        case "산":
+          setUserProfile(mountain);
+          return;
+        case "여행":
+          setUserProfile(travel);
+          return;
+      }
+    }
+  }, [userData]);
 
   function PostChange(e) {
     setPost(e.target.value);
@@ -266,27 +270,26 @@ function Sns() {
         <section>
           <div className="wave"></div>
         </section>
-        <Profile
-          src={
-            userData.profilePicture
-              ? require(`../img/${userData.profilePicture}`)
-              : defaultProfileImg
-          }
-          alt="프로필"
-        ></Profile>
-        <Emoji src={defaultEmoji}></Emoji>
+        {userData ? (
+          <Profile src={userProfile} alt="프로필"></Profile>
+        ) : (
+          <Profile
+            src={
+              userData.profilePicture
+                ? require(`../img/${userData.profilePicture}`)
+                : defaultProfileImg
+            }
+            alt="프로필"
+          ></Profile>
+        )}
         <PostingDiv>
           <Posting
             onChange={PostChange}
             maxLength="24"
             placeholder="좌측 상단에 이전 버튼을 눌러서 자기소개를 추가하고 게시글을 업로드해보세요!"
           ></Posting>
-          {/* <FeelingDiv>
-            {feelingList.map((item) => {
-              return <Feeling src={require(`../img/emoji/${item}.png`)} />;
-            })}
-          </FeelingDiv> */}
-          <RegisterButton disabled>등록</RegisterButton>
+
+          <RegisterButton disabled={!userData}>등록</RegisterButton>
         </PostingDiv>
         <NextDiv>
           <TriangleButton></TriangleButton>
@@ -301,7 +304,6 @@ function Sns() {
             <PostingElement key={index}>
               <PostingProfile src={item.profile} alt="프로필"></PostingProfile>
               <PostingText>{item.text}</PostingText>
-              <PostingEmoji src={item.feeling} alt="사용자 기분"></PostingEmoji>
               <PostingFooter>
                 <PostingName>
                   {item.nickname + " ( " + item.location + " )"}

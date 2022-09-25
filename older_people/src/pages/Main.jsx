@@ -91,7 +91,7 @@ function Main() {
     const auth = getAuth();
     signInAnonymously(auth)
       .then(() => {
-        console.log("로그인 되었습니다");
+        console.log("로그인 되었습니다.");
       })
       .catch((error) => {
         const errorCode = error.code;
