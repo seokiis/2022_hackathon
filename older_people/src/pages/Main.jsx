@@ -4,7 +4,7 @@ import startimg from "../img/start.jpeg";
 import logo from "../img/logo2.png";
 import { Link } from "react-router-dom";
 
-import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 const Div = styled.div`
   width: 100%;

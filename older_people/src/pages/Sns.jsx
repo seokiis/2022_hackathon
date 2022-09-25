@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import "../snsWave.css";
 import { Link } from "react-router-dom";
+// auth
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getDatabase, ref, child, get } from "firebase/database";
 //img
-import profileimg from "../img/user.png";
+import defaultProfileImg from "../img/user.png";
 import flower from "../img/꽃.jpeg";
 import puppy from "../img/강아지.jpeg";
 import cat from "../img/고양이.jpeg";
@@ -60,11 +63,12 @@ const Emoji = styled.img`
 const PostingDiv = styled.div`
   position: absolute;
   display: flex;
-  top: 13%;
+  top: 10%;
   right: 10%;
-  width: 45%;
-  height: 15%;
+  width: 50%;
+  height: 140px;
 `;
+
 const Posting = styled.textarea`
   width: 80%;
   height: 100%;
@@ -78,6 +82,21 @@ const Posting = styled.textarea`
     outline: none;
   }
 `;
+
+// const FeelingDiv = styled.div`
+//   width: 80%;
+//   position: absolute;
+//   display: flex;
+//   justify-content: space-between;
+
+//   margin-left: 1%;
+//   margin-right: 1%;
+// `;
+
+// const Feeling = styled.img`
+//   width: 16%;
+//   border-radius: 50%;
+// `;
 
 const RegisterButton = styled.button`
   width: 20%;
@@ -205,6 +224,38 @@ const PostingFooter = styled.div`
 
 function Sns() {
   const [post, setPost] = useState("");
+  const [userData, setUserData] = useState("");
+
+  // 계정 check
+  useEffect(() => {
+    // auth id
+    const auth = getAuth();
+    const uid = "";
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // uid 획득
+        uid = user.uid;
+      } else {
+        console.log("error: no userId");
+      }
+    });
+
+    // 해당 id db search
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, `users/${uid}`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          // 데이터 존재한다면
+          setUserData(snapshot.val());
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   function PostChange(e) {
     setPost(e.target.value);
   }
@@ -215,7 +266,14 @@ function Sns() {
         <section>
           <div className="wave"></div>
         </section>
-        <Profile src={profileimg} alt="프로필"></Profile>
+        <Profile
+          src={
+            userData.profilePicture
+              ? require(`../img/${userData.profilePicture}`)
+              : defaultProfileImg
+          }
+          alt="프로필"
+        ></Profile>
         <Emoji src={defaultEmoji}></Emoji>
         <PostingDiv>
           <Posting
@@ -223,6 +281,11 @@ function Sns() {
             maxLength="24"
             placeholder="좌측 상단에 이전 버튼을 눌러서 자기소개를 추가하고 게시글을 업로드해보세요!"
           ></Posting>
+          {/* <FeelingDiv>
+            {feelingList.map((item) => {
+              return <Feeling src={require(`../img/emoji/${item}.png`)} />;
+            })}
+          </FeelingDiv> */}
           <RegisterButton disabled>등록</RegisterButton>
         </PostingDiv>
         <NextDiv>
