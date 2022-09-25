@@ -76,7 +76,7 @@
  사용자가 입력한 정보를 취득하여 실시간으로 업데이트 함으로써 자동로그인과 양방향 소통을 할 수 있습니다.
  
  
- ![firebase](https://user-images.githubusercontent.com/113879526/192132401-c391a38b-3fa6-4a6f-b025-1e287511b2b5.jpeg)
+ <img width="1189" alt="KakaoTalk_Photo_2022-09-25-16-52-31" src="https://user-images.githubusercontent.com/113879526/192133745-30ee8a90-cc84-4335-bcd6-c598f73d7b93.png">
   
  
 
