@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../img/logo2.png";
-
-import auth from "../../firebase.js";
+import { push, ref } from "@firebase/database";
+import { database } from "../../firebase";
 
 //components
 import Img from "../../components/Img";
@@ -120,6 +120,12 @@ const Result = ({ userData }) => {
   const handleSubmit = () => {
     // post 요청
     console.log(userData);
+    const Ref = ref(database, "users" + userData.id);
+    push(Ref, {
+      location: userData.loc,
+      nickname: userData.nickname,
+      profilePicture: userData.like,
+    });
     // menu로 이동
     navigate("/menu");
   };
