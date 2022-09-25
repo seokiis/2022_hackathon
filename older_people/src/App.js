@@ -6,6 +6,9 @@ import Menu from "./pages/Menu";
 import IntroducePage from "./pages/IntroducePage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import YoutubePage from "./pages/YoutubePage";
+import MenualKakao from "./pages/MenualKakao";
+import MenualYoutube from "./pages/MenualYoutube";
+import MenualDownload from "./pages/MenualDownload";
 
 const Div = styled.div`
   height: 100vh;
@@ -25,6 +28,10 @@ function App() {
           {/* 자기 소개 페이지 */}
           <Route path="/intro/*" element={<IntroducePage />}></Route>
           <Route path="/youtube" element={<YoutubePage />}></Route>
+          {/* 카카오톡, 유튜브 소개 영상*/}
+          <Route path="/menualkakao" element={<MenualKakao />}></Route>
+          <Route path="/menualyoutube" element={<MenualYoutube />}></Route>
+          <Route path="/menualdownload" element={<MenualDownload />}></Route>
         </Routes>
       </BrowserRouter>
     </Div>

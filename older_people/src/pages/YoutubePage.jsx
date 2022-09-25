@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import logo from "../img/logo2.png";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 
 const Div = styled.div`
   width: 100%;
@@ -78,6 +79,7 @@ const VideoBox = styled.div`
   border: none;
   background-color: white;
   border-radius: 8px;
+  margin-bottom: 60px;
 `;
 
 const Logo = styled.img`
@@ -91,6 +93,8 @@ const BottomDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  bottom: 0;
 `;
 
 const NextButton = styled.button`
@@ -103,6 +107,7 @@ const NextButton = styled.button`
   margin-left: 10px;
   color: #ff6b54;
   font-family: "parkyongjoon";
+  cursor: pointer;
 `;
 
 const NextDiv = styled.div`
@@ -177,7 +182,9 @@ function YoutubePage() {
       <BottomDiv>
         <Logo src={logo} alt="로고"></Logo>
         <NextDiv>
-          <NextButton>다봤어요!</NextButton>
+          <Link to="/menu" style={{ textDecoration: "none", width: "100%" }}>
+            <NextButton>다봤어요!</NextButton>
+          </Link>
         </NextDiv>
       </BottomDiv>
     </Div>
