@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
@@ -106,6 +107,19 @@ const Youtube = styled.div`
 `;
 
 function Menu() {
+  const [userId, setUserId] = useState("default");
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        setUserId(uid);
+      } else {
+        console.log("로그인 안됨");
+      }
+    });
+    console.log(userId);
+  }, []);
   const navigate = useNavigate();
   return (
     <Div>
