@@ -2,7 +2,7 @@
 # 2022 대구를 빛내는 sw 해커톤
 
 ## 배포 주소
-[url](https://hallo-363512.web.app/)
+https://hallo-363512.web.app/
 
 
 ## 팀명
