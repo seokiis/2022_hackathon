@@ -40,7 +40,9 @@
   그럼에도 불구하고 앱 사용이 어려우신 분들을 위해 유튜브에서 좋아하실 만한 키워드를 가져와 클릭만 하면 영상을 바로 보실 수 있는 기능을 만들었습니다.
   
   
-  <img width="499" alt="스크린샷 2022-09-25 15 26 57" src="https://user-images.githubusercontent.com/113879526/192131238-2bc4cc26-6c1e-4db2-9916-b547a91a35c6.png">
+  
+<img width="501" alt="KakaoTalk_Photo_2022-09-25-16-59-35" src="https://user-images.githubusercontent.com/113879526/192134001-4c31cbcd-5844-4a72-9540-4b37944bd0cc.png">
+
 
   * 어르신용 SNS인 소통방을 통해 그날의 기분을 선택하고 간단한 글을 작성해봄으로써 다른 사람들과 소통할 수 있는 기능을 만들어봤습니다.
   
