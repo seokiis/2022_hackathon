@@ -145,10 +145,8 @@ const dummyData = [
   "수성구",
   "달성군",
 ];
-function Location() {
+function Location({ userLoc, handleUserLoc }) {
   const navigate = useNavigate();
-
-  const [home, setHome] = useState("");
 
   return (
     <Div>
@@ -159,7 +157,11 @@ function Location() {
       <WhereAnswerDiv>
         {dummyData.map((item) => {
           return (
-            <WhereButton value={home} item={item} onClick={() => setHome(item)}>
+            <WhereButton
+              value={userLoc}
+              item={item}
+              onClick={() => handleUserLoc(item)}
+            >
               {item}
             </WhereButton>
           );
@@ -184,4 +186,4 @@ function Location() {
   );
 }
 
-export default Location;
+export default React.memo(Location);

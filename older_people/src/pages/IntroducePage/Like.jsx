@@ -140,16 +140,8 @@ const LikeItem = ({ backgroundImg, text, value, onClick }) => {
   );
 };
 
-const Like = () => {
+const Like = ({ userLike, handleUserLike }) => {
   const navigate = useNavigate();
-  const [like, setLike] = useState("");
-
-  const onClick = (item) => {
-    setLike(item);
-
-    // surver request
-  };
-
   return (
     <Div>
       <LikeText>내가 좋아하는 것은?</LikeText>
@@ -157,10 +149,10 @@ const Like = () => {
         {dummyData.map((it) => {
           return (
             <LikeItem
-              value={like}
+              value={userLike}
               backgroundImg={`url(${require(`../../img/${it}.jpeg`)})`}
               text={it}
-              onClick={onClick}
+              onClick={handleUserLike}
             />
           );
         })}
@@ -183,4 +175,4 @@ const Like = () => {
     </Div>
   );
 };
-export default Like;
+export default React.memo(Like);

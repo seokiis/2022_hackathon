@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../img/logo2.png";
 
+import auth from "../../firebase.js";
+
 //components
 import Img from "../../components/Img";
 
@@ -112,26 +114,28 @@ const TriangleButtonBack = styled.div`
   border-color: transparent transparent transparent #fff;
 `;
 
-const Result = () => {
+const Result = ({ userData }) => {
   const navigate = useNavigate();
-  const [name, setName] = useState("김숙자");
-  const [imgName, setImgName] = useState("꽃");
-  // api response
-  // useEffect(() => {
 
-  // }, [])
-
+  const handleSubmit = () => {
+    // post 요청
+    console.log(userData);
+    // menu로 이동
+    navigate("/menu");
+  };
   return (
     <Div>
       <MainDiv>
         <Img
           width={"18rem"}
-          backgroundImg={`url(${require(`../../img/${imgName}.jpeg`)})`}
+          backgroundImg={`url(${require(`../../img/${userData.like}.jpeg`)})`}
           hover={false}
           text={false}
         />
         <IntroSpan>
-          {name}님,
+          {userData.loc} 사시는
+          <br />
+          {userData.nickname}님,
           <br />
           자기 소개를 완료했어요.
         </IntroSpan>
@@ -139,7 +143,7 @@ const Result = () => {
       <BottomDiv>
         <Logo src={logo} alt="로고"></Logo>
         <NextDiv>
-          <NextButton onClick={() => navigate("/menu")}>다했어요!</NextButton>
+          <NextButton onClick={handleSubmit}>다했어요!</NextButton>
           <TriangleButton />
         </NextDiv>
         <PreDiv>

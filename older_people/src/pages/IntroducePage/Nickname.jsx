@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../../img/logo2.png";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const NicknameInput = styled.input`
@@ -132,14 +131,13 @@ const TriangleButtonBack = styled.div`
   border-color: transparent transparent transparent #fff;
 `;
 
-function Nickname() {
+function Nickname({ userNickname, handleNickname }) {
   const navigate = useNavigate();
-  const [author, setAuthor] = useState("");
 
   return (
     <Div>
       <NicknameText>내 이름(별명)은?</NicknameText>
-      <ReportEditor value={author} handleChange={setAuthor} />
+      <ReportEditor value={userNickname} handleChange={handleNickname} />
       <BottomDiv>
         <Logo src={logo} alt="로고"></Logo>
         <NextDiv>
@@ -157,4 +155,4 @@ function Nickname() {
   );
 }
 
-export default Nickname;
+export default React.memo(Nickname);

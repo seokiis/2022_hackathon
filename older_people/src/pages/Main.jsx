@@ -4,6 +4,8 @@ import startimg from "../img/start.jpeg";
 import logo from "../img/logo2.png";
 import { Link } from "react-router-dom";
 
+import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
+
 const Div = styled.div`
   width: 100%;
   height: 100%;
@@ -85,6 +87,19 @@ const TriangleButton = styled.div`
   border-color: transparent transparent transparent white;
 `;
 function Main() {
+  const signIn = () => {
+    const auth = getAuth();
+    signInAnonymously(auth)
+      .then(() => {
+        console.log("로그인 되었습니다");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
+  };
   return (
     <Div>
       <StartImg src={startimg} alt="시작일러스트"></StartImg>
@@ -94,7 +109,7 @@ function Main() {
         <Logo src={logo} alt="로고"></Logo>
         <NextDiv>
           <Link to="/menu">
-            <NextButton>다음</NextButton>
+            <NextButton onClick={signIn}>다음</NextButton>
           </Link>
           <TriangleButton></TriangleButton>
         </NextDiv>
