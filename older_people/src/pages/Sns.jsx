@@ -102,8 +102,8 @@ const PostingElement = styled.div`
   border-radius: 8px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 10px 0;
+  //align-items: center;
+  padding: 5px 10px;
   margin-bottom: 20px;
   position: relative;
 `;
@@ -117,9 +117,12 @@ const PostingProfile = styled.img`
 const PostingText = styled.p`
   font-family: "parkyongjoon";
   font-weight: bold;
+  text-align: left;
+  margin-left: 20px;
   width: 80%;
   height: 80%;
   font-size: 1.5rem;
+  margin-bottom: 30px;
 `;
 
 const PostingEmoji = styled.img`
@@ -130,13 +133,18 @@ const PostingEmoji = styled.img`
 `;
 
 const LikeDiv = styled.div`
-  position: absolute;
-  bottom: 5%;
-  right: 3%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: absolute;
+  right: 15%;
 `;
+const PostingName = styled.span`
+  font-weight: bold;
+  font-family: "parkyongjoon";
+  color: #4f4c2c;
+`;
+
 const PostingLike = styled.img`
   width: 30px;
 `;
@@ -184,6 +192,17 @@ const TriangleButton = styled.div`
   border-color: transparent white transparent white;
   margin-right: 10px;
 `;
+
+const PostingFooter = styled.div`
+  position: absolute;
+  bottom: 7%;
+  left: 28%;
+  width: 80%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+`;
+
 function Sns() {
   const [post, setPost] = useState("");
   function PostChange(e) {
@@ -201,8 +220,8 @@ function Sns() {
         <PostingDiv>
           <Posting
             onChange={PostChange}
-            maxLength="100"
-            placeholder="좌측 하단에 이전 버튼을 눌러서 자기소개를 추가하고 게시글을 업로드해보세요!"
+            maxLength="24"
+            placeholder="좌측 상단에 이전 버튼을 눌러서 자기소개를 추가하고 게시글을 업로드해보세요!"
           ></Posting>
           <RegisterButton disabled>등록</RegisterButton>
         </PostingDiv>
@@ -220,10 +239,15 @@ function Sns() {
               <PostingProfile src={item.profile} alt="프로필"></PostingProfile>
               <PostingText>{item.text}</PostingText>
               <PostingEmoji src={item.feeling} alt="사용자 기분"></PostingEmoji>
-              <LikeDiv>
-                <PostingLike src={heart}></PostingLike>
-                <NumberOfLike>{item.heart}</NumberOfLike>
-              </LikeDiv>
+              <PostingFooter>
+                <PostingName>
+                  {item.nickname + " ( " + item.location + " )"}
+                </PostingName>
+                <LikeDiv>
+                  <PostingLike src={heart}></PostingLike>
+                  <NumberOfLike>{item.heart}</NumberOfLike>
+                </LikeDiv>
+              </PostingFooter>
             </PostingElement>
           );
         })}
@@ -238,7 +262,7 @@ const postData = [
     nickname: "꽃분이",
     location: "북구",
     feeling: happy,
-    text: "안녕하세요안녕하세요",
+    text: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세",
     heart: 2,
   },
   {
@@ -262,7 +286,7 @@ const postData = [
     nickname: "꽃분이",
     location: "북구",
     feeling: happy,
-    text: "안녕하세요안녕하세요",
+    text: "안녕하세요안녕하세요안녕하세요",
     heart: 2,
   },
   {
