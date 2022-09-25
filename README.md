@@ -85,7 +85,7 @@
  
 
   ## 시연 영상
-[https://youtu.be/6pWZOfpPlSk](https://youtu.be/6pWZOfpPlSk)
+[![Video Label](http://img.youtube.com/vi/6pWZOfpPlSk/0.jpg)](https://youtu.be/6pWZOfpPlSk))
 
   
   
