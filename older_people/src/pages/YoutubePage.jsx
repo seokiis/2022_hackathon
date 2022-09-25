@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import logo from "../img/logo2.png";
-import { Link } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
+
 
 const Div = styled.div`
   width: 100%;
@@ -79,6 +80,7 @@ const VideoBox = styled.div`
   border: none;
   background-color: white;
   border-radius: 8px;
+  margin-bottom: 60px;
 `;
 
 const Logo = styled.img`
@@ -106,6 +108,7 @@ const NextButton = styled.button`
   margin-left: 10px;
   color: #ff6b54;
   font-family: "parkyongjoon";
+  cursor: pointer;
 `;
 
 const NextDiv = styled.div`

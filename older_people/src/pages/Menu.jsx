@@ -1,6 +1,5 @@
 import React from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
-
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
@@ -8,7 +7,9 @@ import {
   faMessage,
   faHandshakeAngle,
   faUserPlus,
+  faDownload,
 } from "@fortawesome/free-solid-svg-icons";
+
 const Div = styled.div`
   width: 100%;
   height: 100vh;
@@ -144,32 +145,62 @@ function Menu() {
           </MenuDiv>
         </Link>
         <MenuDivRow>
-          <MenuDiv
+          <Link
+            to="/menualkakao"
             style={{
-              backgroundColor: "#ecffff",
+              textDecoration: "none",
+              width: "100%",
               marginRight: "20px",
             }}
           >
-            <IconDiv>
-              <FontAwesomeIcon style={{ color: "#93EEEE" }} icon={faMessage} />
-            </IconDiv>
-            <Kakao>
-              카카오톡
-              <br />
-              사용법
-            </Kakao>
-          </MenuDiv>
-          <MenuDiv style={{ backgroundColor: "#fff6ff" }}>
-            <IconDiv>
-              <FontAwesomeIcon style={{ color: "#FBBCFB" }} icon={faYoutube} />
-            </IconDiv>
-            <Youtube>
-              유튜브
-              <br />
-              사용법
-            </Youtube>
-          </MenuDiv>
+            <MenuDiv
+              style={{
+                backgroundColor: "#ecffff",
+              }}
+            >
+              <IconDiv>
+                <FontAwesomeIcon
+                  style={{ color: "#93EEEE" }}
+                  icon={faMessage}
+                />
+              </IconDiv>
+              <Kakao>
+                카카오톡
+                <br />
+                사용법
+              </Kakao>
+            </MenuDiv>
+          </Link>
+          <Link
+            to="/menualyoutube"
+            style={{ textDecoration: "none", width: "100%" }}
+          >
+            <MenuDiv style={{ backgroundColor: "#fff6ff" }}>
+              <IconDiv>
+                <FontAwesomeIcon
+                  style={{ color: "#FBBCFB" }}
+                  icon={faYoutube}
+                />
+              </IconDiv>
+              <Youtube>
+                유튜브
+                <br />
+                사용법
+              </Youtube>
+            </MenuDiv>
+          </Link>
         </MenuDivRow>
+        <Link
+          to="/menualdownload"
+          style={{ textDecoration: "none", width: "100%" }}
+        >
+          <MenuDiv style={{ backgroundColor: "#EAECE3" }}>
+            <IconDiv>
+              <FontAwesomeIcon style={{ color: "#C0CAC0" }} icon={faDownload} />
+            </IconDiv>
+            앱 다운로드 방법
+          </MenuDiv>
+        </Link>
       </MenuNav>
     </Div>
   );
