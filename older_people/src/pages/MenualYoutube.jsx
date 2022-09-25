@@ -86,6 +86,14 @@ const NextDiv = styled.div`
   position: absolute;
   left: 20px;
 `;
+const TriangleButton = styled.div`
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 15px 10px 0;
+  border-color: transparent #ff6b54 transparent #ff6b54;
+  margin-right: 5px;
+`;
 
 function MenualYoutube() {
   const navigate = useNavigate();
@@ -97,7 +105,7 @@ function MenualYoutube() {
           title="youtube"
           type="text/html"
           width="80%"
-          height="40%"
+          height="65%"
           src={"https://youtube.com/embed/Cb6b-EyF4p4"}
           allow="fullscreen"
         ></Iframe>
@@ -105,6 +113,7 @@ function MenualYoutube() {
       <BottomDiv>
         <Logo src={logo} alt="로고"></Logo>
         <NextDiv>
+          <TriangleButton></TriangleButton>
           <NextButton onClick={() => navigate("/menu")}>다봤어요!</NextButton>
         </NextDiv>
       </BottomDiv>
