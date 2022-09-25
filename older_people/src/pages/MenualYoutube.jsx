@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import startimg from "../img/start.jpeg";
 import logo from "../img/logo2.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Div = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,82 +25,100 @@ const Div = styled.div`
     #3ab97d,
     #29b576
   );
+`;
+
+const MainHead = styled.h1`
   font-family: "parkyongjoon";
-`;
-
-const StartImg = styled.img`
-  width: 55%;
-  border-radius: 50%;
-`;
-
-const Welcome = styled.h2`
-  font-size: 2em;
-  color: white;
-`;
-const Welcome2 = styled.h1`
   font-size: 4em;
   color: white;
-  margin-top: 0;
 `;
+
+const Iframe = styled.iframe`
+  margin: 10px 0;
+`;
+
+const VideoBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 90%;
+  height: 70%;
+  display: flex;
+  border: none;
+  background-color: white;
+  border-radius: 8px;
+  margin-bottom: 60px;
+  margin-top: 10px;
+`;
+
 const Logo = styled.img`
   padding: 10px 20px;
   height: 90px;
 `;
 
 const BottomDiv = styled.div`
-  position: absolute;
-  bottom: 0;
   width: 100%;
   height: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  bottom: 0;
 `;
 
 const NextButton = styled.button`
   border: none;
   background: none;
+
   font-weight: bold;
   font-size: 1.5rem;
-  margin-right: 10px;
-  color: white;
+
+  margin-left: 10px;
+  color: #ff6b54;
   font-family: "parkyongjoon";
   cursor: pointer;
 `;
 
 const NextDiv = styled.div`
-  height: 100%;
   display: flex;
   align-items: center;
   position: absolute;
-  right: 20px;
+  left: 20px;
 `;
-
 const TriangleButton = styled.div`
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 10px 0 10px 15px;
-  border-color: transparent transparent transparent white;
+  border-width: 10px 15px 10px 0;
+  border-color: transparent #ff6b54 transparent #ff6b54;
+  margin-right: 5px;
 `;
-function Main() {
+
+function MenualYoutube() {
+  const navigate = useNavigate();
   return (
     <Div>
-      <StartImg src={startimg} alt="시작일러스트"></StartImg>
-      <Welcome>Welcome</Welcome>
-      <Welcome2>환영합니다</Welcome2>
+      <MainHead>유튜브 사용법</MainHead>
+      <VideoBox>
+        <Iframe
+          title="youtube"
+          type="text/html"
+          width="80%"
+          height="65%"
+          src={"https://youtube.com/embed/Cb6b-EyF4p4"}
+          allow="fullscreen"
+        ></Iframe>
+      </VideoBox>
       <BottomDiv>
         <Logo src={logo} alt="로고"></Logo>
-
         <NextDiv>
-          <Link to="/menu">
-            <NextButton>다음</NextButton>
-          </Link>
           <TriangleButton></TriangleButton>
+          <NextButton onClick={() => navigate("/menu")}>다봤어요!</NextButton>
         </NextDiv>
       </BottomDiv>
     </Div>
   );
 }
 
-export default Main;
+export default MenualYoutube;
