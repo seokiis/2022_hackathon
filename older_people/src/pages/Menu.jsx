@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate, Link } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useNavigate, Link } from "react-router-dom";
+import { getAuth, onAuthStateChanged, auth } from "firebase/auth";
+import { get, ref, child } from "@firebase/database";
+import { database } from "../firebase";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
@@ -10,6 +12,13 @@ import {
   faUserPlus,
   faDownload,
 } from "@fortawesome/free-solid-svg-icons";
+import flower from "../img/꽃.jpeg";
+import puppy from "../img/강아지.jpeg";
+import cat from "../img/고양이.jpeg";
+import sea from "../img/바다.jpeg";
+import mountain from "../img/산.jpeg";
+import travel from "../img/여행.jpeg";
+import profiledefault from "../img/user.png";
 
 const Div = styled.div`
   width: 100%;
@@ -64,8 +73,11 @@ const AddProfile = styled.div`
   justify-content: center;
   border-radius: 50%;
   background-color: lightgray;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: ${profiledefault};
   cursor: pointer;
-
   &:hover {
     background-color: #91ce9f;
   }
@@ -106,35 +118,103 @@ const Youtube = styled.div`
   font-size: 1.8rem;
 `;
 
+const UserImg = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+`;
+
 function Menu() {
-  const [userId, setUserId] = useState("default");
+  const [userId, setUserId] = useState("");
+  const [userData, setUserData] = useState({});
+  const [userProfile, setUserProfile] = useState("");
+  const [userNickname, setUserNickname] = useState("");
+  const navigate = useNavigate();
   useEffect(() => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
+    getAuth().onAuthStateChanged((user) => {
       if (user) {
         const uid = user.uid;
         setUserId(uid);
       } else {
-        console.log("로그인 안됨");
+        console.log("err");
       }
     });
-    console.log(userId);
   }, []);
-  const navigate = useNavigate();
+  useEffect(() => {
+    const Ref = ref(database);
+    get(child(Ref, "users/" + userId))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setUserData(Object(snapshot.val()));
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  const User = userData[userId];
+  console.log(User);
+  useEffect(() => {
+    if (User) {
+      setUserNickname(User["nickname"]);
+    }
+  }, [userData]);
+
+  useEffect(() => {
+    if (User) {
+      switch (User["profilePicture"]) {
+        case "강아지":
+          setUserProfile(puppy);
+          return;
+        case "고양이":
+          setUserProfile(cat);
+          return;
+        case "꽃":
+          setUserProfile(flower);
+          return;
+        case "바다":
+          setUserProfile(sea);
+          return;
+        case "산":
+          setUserProfile(mountain);
+          return;
+        case "여행":
+          setUserProfile(travel);
+          return;
+      }
+    }
+  }, [userData]);
+  //console.log("");
   return (
     <Div>
       <UserDiv>
-        <AddProfile onClick={() => navigate("/intro")}>
-          <FontAwesomeIcon
-            style={{ fontSize: "4rem", color: "white" }}
-            icon={faUserPlus}
-          />
-        </AddProfile>
+        {userData ? (
+          <AddProfile>
+            <UserImg src={userProfile} alt="프로필"></UserImg>
+          </AddProfile>
+        ) : (
+          <AddProfile onClick={() => navigate("/intro")}>
+            <FontAwesomeIcon
+              style={{ fontSize: "4rem", color: "white" }}
+              icon={faUserPlus}
+            />
+          </AddProfile>
+        )}
         <SpeechBubble>
           <BubbleText>
-            자기소개를
-            <br />
-            추가해봐요!
+            {userData ? (
+              <>
+                안녕하세요 <br />
+                {userNickname}님!
+              </>
+            ) : (
+              <>
+                자기소개를 <br />
+                작성하세요
+              </>
+            )}
           </BubbleText>
         </SpeechBubble>
       </UserDiv>
