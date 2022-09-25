@@ -3,13 +3,14 @@ import styled from "styled-components";
 import logo from "../img/logo2.png";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 
+
 const Div = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding-top: 50px;
   background-image: linear-gradient(
     to left bottom,
     #98cfa1,
@@ -114,9 +115,17 @@ const NextDiv = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  left: 20px;
+  left: 3%;
 `;
 
+const TriangleButton = styled.div`
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 15px 10px 0;
+  border-color: transparent #ff6b54 transparent #ff6b54;
+  margin-right: 5px;
+`;
 const dummyData = [
   "건강",
   "정치",
@@ -182,7 +191,8 @@ function YoutubePage() {
       <BottomDiv>
         <Logo src={logo} alt="로고"></Logo>
         <NextDiv>
-          <Link to="/menu" style={{ textDecoration: "none", width: "100%" }}>
+          <TriangleButton></TriangleButton>
+          <Link to="/menu">
             <NextButton>다봤어요!</NextButton>
           </Link>
         </NextDiv>
