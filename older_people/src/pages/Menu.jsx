@@ -130,6 +130,7 @@ function Menu() {
   const [userProfile, setUserProfile] = useState("");
   const [userNickname, setUserNickname] = useState("");
   const navigate = useNavigate();
+
   useEffect(() => {
     getAuth().onAuthStateChanged((user) => {
       if (user) {
