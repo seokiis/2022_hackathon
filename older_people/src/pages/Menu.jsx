@@ -192,7 +192,7 @@ function Menu() {
     <Div>
       <UserDiv>
         {userData ? (
-          <AddProfile>
+          <AddProfile onClick={() => navigate("/intro")}>
             <UserImg src={userProfile} alt="프로필"></UserImg>
           </AddProfile>
         ) : (
