@@ -62,9 +62,12 @@
   * React 활용
 
  사용자의 프로필사진과 이모지로 표현된 기분을 좌측 상단에 배치했습니다. 오른쪽 상단에 텍스트 입력창을 통해 사용자가 글을 작성할 수 있습니다.
- 사용자가 작성한 글 뿐만 아니라 다른 사용자들이 작성한 글들을 볼 수 있게 배치함으로써 공감되는 글에 좋아요를 누를 수 있습니다.
  
- <img width="714" alt="스크린샷 2022-09-25 11 12 47" src="https://user-images.githubusercontent.com/113879526/192126538-1627a9e8-e897-4596-891c-f461740f9b9d.png">
+ 
+ ![다운로드](https://user-images.githubusercontent.com/113879526/192135154-e26fbbe0-fd63-477e-9d58-2cdb7b718e28.png)
+
+ 
+ 
 
   * 유튜브 API 적용
 
@@ -82,4 +85,7 @@
  
 
   ## 시연 영상
- 
+[https://youtu.be/6pWZOfpPlSk](https://youtu.be/6pWZOfpPlSk)
+
+  
+  
