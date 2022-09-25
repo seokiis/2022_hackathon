@@ -4,7 +4,7 @@ import "../snsWave.css";
 import { Link } from "react-router-dom";
 // auth
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getDatabase, ref, child, get } from "firebase/database";
+import { getDatabase, ref, child, get, push } from "firebase/database";
 import { database } from "../firebase";
 //img
 import defaultProfileImg from "../img/user.png";
@@ -198,6 +198,7 @@ const PostingFooter = styled.div`
 
 function Sns() {
   const [post, setPost] = useState("");
+  const [postList, setPostList] = useState([]);
   const [userId, setUserId] = useState("");
   const [userData, setUserData] = useState({});
   const [userProfile, setUserProfile] = useState("");
@@ -213,6 +214,7 @@ function Sns() {
       }
     });
   }, []);
+
   useEffect(() => {
     const Ref = ref(database);
     get(child(Ref, "users/" + userId))
@@ -227,8 +229,24 @@ function Sns() {
         console.error(error);
       });
   }, []);
+
+  useEffect(() => {
+    const Ref = ref(database);
+    get(child(Ref, "posting/"))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setPostList(Object.values(snapshot.val()));
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   const User = userData[userId];
-  console.log(User);
+  console.log(postList);
   useEffect(() => {
     if (User) {
       setUserNickname(User["nickname"]);
@@ -263,6 +281,15 @@ function Sns() {
   function PostChange(e) {
     setPost(e.target.value);
   }
+  function PostSubmit(e) {
+    const Ref = ref(database, "posting/");
+    push(Ref, {
+      publisher: userNickname,
+      profilePicture: userProfile,
+      like: 2,
+      text: post,
+    });
+  }
 
   return (
     <Div>
@@ -288,8 +315,9 @@ function Sns() {
             maxLength="24"
             placeholder="좌측 상단에 이전 버튼을 눌러서 자기소개를 추가하고 게시글을 업로드해보세요!"
           ></Posting>
-
-          <RegisterButton disabled={!userData}>등록</RegisterButton>
+          <RegisterButton onClick={PostSubmit} disabled={!userData}>
+            등록
+          </RegisterButton>
         </PostingDiv>
         <NextDiv>
           <TriangleButton></TriangleButton>
@@ -299,18 +327,19 @@ function Sns() {
         </NextDiv>
       </HeaderBackground>
       <Board>
-        {postData.map((item, index) => {
+        {postList?.map((item, index) => {
           return (
             <PostingElement key={index}>
-              <PostingProfile src={item.profile} alt="프로필"></PostingProfile>
+              <PostingProfile
+                src={item.profilePicture}
+                alt="프로필"
+              ></PostingProfile>
               <PostingText>{item.text}</PostingText>
               <PostingFooter>
-                <PostingName>
-                  {item.nickname + " ( " + item.location + " )"}
-                </PostingName>
+                <PostingName>{item.publisher}</PostingName>
                 <LikeDiv>
                   <PostingLike src={heart}></PostingLike>
-                  <NumberOfLike>{item.heart}</NumberOfLike>
+                  <NumberOfLike>{item.like}</NumberOfLike>
                 </LikeDiv>
               </PostingFooter>
             </PostingElement>
